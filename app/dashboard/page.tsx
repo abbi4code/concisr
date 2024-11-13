@@ -1,10 +1,13 @@
 import React from 'react'
+import { authOptions, CustomSession } from '../api/auth/[...nextauth]/opt'
+import { getServerSession } from 'next-auth'
+import DashboardNavbar from '@/components/dashboard/DashboardNavbar'
 
-export default function page() {
+export default async function page() {
+    const session: CustomSession | null = await getServerSession(authOptions)
   return (
-    <div>
-        i am dashboard
-      
-    </div>
+   <>
+   <DashboardNavbar user={session?.user!} userCoins={null}/>
+   </>
   )
 }

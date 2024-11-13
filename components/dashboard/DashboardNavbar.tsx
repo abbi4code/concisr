@@ -1,10 +1,9 @@
 
 import React from "react";
-import ProfileDropdown from "../common/ProfileDropdown";
-
 import Image from "next/image";
 import Link from "next/link";
 import { CustomUser } from "@/app/api/auth/[...nextauth]/opt";
+import ProfileDrop from "../common/ProfileDrop";
 
 export default async function DashboardNavbar({
   user,
@@ -26,7 +25,7 @@ export default async function DashboardNavbar({
           <span className="text-xl font-bold">{userCoins?.coins ?? 0}</span>
           <Image src="/images/coin.png" width={30} height={30} alt="coin" />
         </div>
-        <ProfileDropdown user={user} />
+        <ProfileDrop user={user} />
       </div>
     </nav>
   );
