@@ -22,6 +22,36 @@ model User {
   provider String 
   coins Int @default(50)
   created_at DateTime @default(now())
+  summary Summary[]
+  transactions Transactions[]
+  coinspend CoinSpend[]
 
 }
 
+model Summary {
+  id String @id @db.Uuid @default(uuid())
+  user_id Int
+  user User @relation(fields: [user_id],references: [id], onDelete: Cascade)
+  title String
+  url String
+  reponse String
+  createdAt DateTime @default(now())
+  coinspend CoinSpend[]
+}
+
+model Transactions{
+  id String @id @db.Uuid @default(uuid())
+  user_id Int
+  user User @relation(fields: [user_id], references: [id],onDelete: Cascade)
+  amount Int
+  status Int @db.SmallInt
+  createdAt DateTime @default(now())
+}
+
+model CoinSpend {
+  id String @id @db.Uuid @default(uuid())
+  user_id Int
+  user User @relation(fields: [user_id],references: [id],onDelete: Cascade)
+  summary_id String @db.Uuid
+  summary Summary @relation(fields: [summary_id],references: [id],onDelete: Cascade)
+}
