@@ -6,9 +6,12 @@ import { getServerSession } from "next-auth";
 import { authOptions, CustomSession } from "./api/auth/[...nextauth]/opt";
 
 export default async function Home() {
-  const session:CustomSession = await getServerSession(authOptions)
+  //this hook provided by nextauth itself
+  const session:CustomSession | null= await getServerSession(authOptions)
+  console.log("session",session)
   return (
    <>
+   {JSON.stringify(session)}
    <Navbar user={session?.user}/>
    <HeroSection/>
    <Pricing user={session?.user}/>
